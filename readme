@@ -1,6 +1,9 @@
-链接：
+## 链接：
     修改在model.py中的processTextRank和processTextMt5的todo部分
     使其能正确调用语言模型端的API
     后端API应该返回string类型的变量
     text = API()
     可假设用户传递参数均正确
+
+## 配置环境：
+    pip install -r requirement.txt
