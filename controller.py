@@ -7,8 +7,7 @@ class Controller:
         self.model = model
         self.view = view
     
-        self.view.Gpt2Button.clicked.connect(self.EmitGpt2)
-        self.view.Mt5Button.clicked.connect(self.EmitMt5)
+        self.view.Mt5Button_3.clicked.connect(self.EmitMt5)
         
     def WarningDialog(self, warning):
         msgBox = QMessageBox(QMessageBox.Icon.Warning, "Warning", warning)
@@ -21,16 +20,15 @@ class Controller:
         self.Emit("Mt5")
         
     def Emit(self, name):
-        self.view.textOutGpt2.clear()
         self.view.textOutMt5.clear()
         
-        textIn, stopFlag, dampingFactor, excertLength, algorithm = self.getMsg()
+        textIn = self.getMsg()
         
-        if self.judge(textIn, dampingFactor, excertLength) == False:
+        if self.judge(textIn) == False:
             return
         
         if(name == "Gpt2"):
-            text = self.model.ProcessTextRank(textIn, stopFlag, dampingFactor, excertLength, algorithm)
+            text = self.model.ProcessTextRank(textIn)
             self.view.textOutGpt2.setText(text)
         elif(name == "Mt5"):
             text = self.model.ProcessTextMt5(textIn, stopFlag, dampingFactor, excertLength, algorithm)
@@ -42,33 +40,14 @@ class Controller:
     def getMsg(self):
         
         return (
-            self.view.textIn.toPlainText(),
-            self.view.stopBox.isChecked(),
-            self.view.dampingLine.text(),
-            self.view.excertLine.text(),
-            self.view.comboBox.currentText()
+            self.view.textIn.toPlainText()
         )
 
-    def judge(self, textIn, dampingFactor, excertLength):
+    def judge(self, textIn):
         
         if textIn == "":
             self.WarningDialog("请输入被摘要文本")
             self.view.textIn.setFocus()
-            return False
-        
-        try:
-            dampingFactor = float(dampingFactor)
-            
-        except:
-            self.WarningDialog("请输入正确的阻尼系数")
-            self.view.dampingLine.setFocus()
-            return False
-            
-        try:
-            excertLength = int(excertLength)
-        except:
-            self.WarningDialog("请输入正确的摘要长度")
-            self.view.dampingLine.setFocus()
             return False
         
         return True
