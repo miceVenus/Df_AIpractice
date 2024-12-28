@@ -30,7 +30,8 @@
   </property>
   <property name="font">
    <font>
-    <family>Malgun Gothic Semilight</family>
+    <family>Microsoft YaHei</family>
+    <pointsize>12</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -373,7 +374,7 @@ border-width:2px</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="AckButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
              <horstretch>0</horstretch>
