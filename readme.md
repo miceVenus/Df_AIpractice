@@ -1,7 +1,7 @@
-```markdown
 # Text Processing Application
 
-这是一个简单的文本处理应用程序，使用 PyQt5 构建图形用户界面（GUI），并使用 MVC（Model-View-Controller）模式组织代码。
+这是一个简单的文本处理应用程序，使用socket API 与后端模型进行通信
+使用 PyQt5 构建图形用户界面（GUI），并使用 MVC（Model-View-Controller）模式组织代码。
 
 ## 目录结构
 
@@ -88,6 +88,9 @@ python server.py
 pip install -r requirements.txt
 ```
 
+### TO DO:
+    - [] 继续美化界面原型
+    - [] 还有什么没完成呢
 ## 贡献
 
 上述readme部分由copilot生成，后续会根据实际情况进行修改。
