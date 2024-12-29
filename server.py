@@ -1,9 +1,12 @@
 import socket
 import threading
 import logging
+HOST = '0.0.0.0' # 服务器的本地IP地址
+PORT = 12345 # 服务器的端口号
+CODING= "utf-8"
 
 class Server:
-    def __init__(self, host='0.0.0.0', port=12345):
+    def __init__(self, host=HOST, port=PORT):
         self.host = host
         self.port = port
         
@@ -14,10 +17,10 @@ class Server:
     def HandleClient(self, clientSocket, clientAddress):
         try:
             logging.info(f"连接来自 {clientAddress}")
-            dataRecv = clientSocket.recv(65536).decode('utf-8')
+            dataRecv = clientSocket.recv(65536).decode(CODING)
             logging.info(f"接收到数据")
             dataHandled = self.DataProcess(dataRecv)
-            clientSocket.sendall(dataHandled.encode('utf-8'))
+            clientSocket.sendall(dataHandled.encode(CODING))
             
         except Exception as e:
             logging.error(f"处理数据时发生错误: {e}")

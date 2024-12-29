@@ -1,3 +1,4 @@
+from genericpath import exists
 from PyQt5.QtWidgets import QMessageBox, QFileDialog, QWidget
 from PyQt5.QtGui import QIcon
 from page import Ui_Form
@@ -8,7 +9,7 @@ class Controller:
         self.model = model
         self.view = view
         
-        self.view.Mt5Button_3.clicked.connect(self.EmitMt5)
+        self.view.Mt5Button_3.clicked.connect(self.GenerateExcert)
         self.view.upload.clicked.connect(self.OpenFileDialog)
         self.view.AckButton.clicked.connect(self.AckOpenFile)
         
@@ -16,7 +17,7 @@ class Controller:
         msgBox = QMessageBox(QMessageBox.Icon.Warning, "Warning", warning)
         msgBox.exec_()
         
-    def EmitMt5(self):
+    def GenerateExcert(self):
         self.view.textOutMt5.clear()
         
         textIn = self.view.textIn.toPlainText()
@@ -32,7 +33,7 @@ class Controller:
         self.selectedFileList = fileDirList
         fileNameList = []
         for fileDir in fileDirList:
-            fileNameList.append(fileDir.split("/")[-1])
+            fileNameList.append(self.GetFileName(fileDir) + "\n")
             
         if fileNameList:
             fileNames = "".join(fileNameList)
@@ -52,3 +53,7 @@ class Controller:
             return False
         
         return True
+    
+    def GetFileName(self, fileDir):
+        fileName = fileDir.split("/")[-1]
+        return fileName
