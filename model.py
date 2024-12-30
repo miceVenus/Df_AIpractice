@@ -1,4 +1,5 @@
 
+from ast import arg
 import socket
 import os
 from socketserver import DatagramRequestHandler
@@ -13,19 +14,20 @@ class Model:
         self.host = HOST # 服务器的ip地址 记得修改
         self.port = PROT # 服务器的端口号 记得修改
         
-    def ProcessUploadFile(self, fileDirList): # 上传文件处理函数
+    def ProcessUploadFile(self, fileDirList, outputDir="output"): # 上传文件处理函数
+        
         for fileDir in fileDirList:    
             content = self.GetContent(fileDir)
             dataRecv = self.TryInitSocketAndSendContentAndGetMessage(content)
-            self.WriteAsFile(dataRecv, fileDirList)
+            self.WriteAsFile(dataRecv, fileDirList, outputDir)
 
-    def ProcessTextIn(self, text) -> str: # 直接输入文本处理函数
+    def ProcessTextIn(self, text, *args) -> str: # 直接输入文本处理函数
         dataRecv = self.TryInitSocketAndSendContentAndGetMessage(text)
         return dataRecv
         
     def TryInitSocketAndSendContentAndGetMessage(self, content) -> str:
+        s = self.InitSocket()
         try: 
-            s = self.InitSocket()
             s.sendall(content.encode(CODING))
             dataRecv = s.recv(65536).decode(CODING)
             return dataRecv
@@ -41,15 +43,15 @@ class Model:
                     s.close()
 
 
-    def WriteAsFile(self, content, fileDirList):
-        if not os.path.exists("output"):
-            os.mkdir("output")
+    def WriteAsFile(self, content, fileDirList, outputDir="output"):
+        if not os.path.exists(outputDir):
+            os.mkdir(outputDir)
         
         for fileDir in fileDirList:
             fileName = self.GetFileName(fileDir)
-            self.WriteContentToFile(content, fileName)
+            self.WriteContentToFile(content, fileName, outputDir)
             
-    def GetFileName(fileDir):
+    def GetFileName(self, fileDir):
         fileName = fileDir.split("/")[-1]
         return fileName
     
@@ -72,8 +74,8 @@ class Model:
             
         return content
     
-    def WriteContentToFile(self, content, fileName):
-        with open(f"output/{fileName}.txt", mode='w', encoding=CODING) as file:
+    def WriteContentToFile(self, content, fileName, outputDir):
+        with open(f"{outputDir}/{fileName}.txt", mode='w', encoding=CODING) as file:
             file.write(content) 
         file.close()
     
