@@ -12,6 +12,14 @@
 controller.py
 
 
+    ├──
+
+feg.bat
+
+    ├──
+
+feg.py
+
     ├── 
 
 main.py
@@ -93,6 +101,7 @@ pip install -r requirements.txt
 ```
 
 ### TO DO:
+    - [] 完成feg命令的安全全局调用
     - [] 继续美化界面原型
     - [] 还有什么没完成呢
 ## 贡献
