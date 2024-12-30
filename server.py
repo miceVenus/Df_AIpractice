@@ -1,52 +1,72 @@
 import socket
 import threading
 import logging
-HOST = '0.0.0.0' # 服务器的本地IP地址
-PORT = 12345 # 服务器的端口号
+import time
+
+# 服务器的本地IP地址
+HOST = '0.0.0.0'
+ 
+# 服务器的端口号
+PORT = 12345 
 CODING= "utf-8"
+MAX_CONNECTIONS = 3
 
 class Server:
-    def __init__(self, host=HOST, port=PORT):
+    def __init__(self, host=HOST, port=PORT, maxConnection=MAX_CONNECTIONS):
         self.host = host
         self.port = port
-        
+        self.serverSocket = None
+        self.maxConnection = maxConnection
+        self.serverTh = None
+        self.clientQueue = list()
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        
         self.StartServer()
         
-    def HandleClient(self, clientSocket, clientAddress):
+    def HandleClient(self):
+        while True:
+            try:
+                clientSocket, clientAddress = self.serverSocket.accept()
+            except Exception as ret:
+                time.sleep(0.01)
+            else:
+                self.clientQueue.append((clientSocket, clientAddress))
+                logging.info(f"Socket服务端与IP地址为{clientAddress}的客户端连接")
+            
+            for CS, CA in self.clientQueue:
+                clientTh = threading.Thread(target=self.DealRecvAndSend, args=(CS, CA))
+                clientTh.start()
+
+
+    def DealRecvAndSend(self, clientSocket, clientAddress):
         try:
-            logging.info(f"连接来自 {clientAddress}")
             dataRecv = clientSocket.recv(65536).decode(CODING)
-            logging.info(f"接收到数据")
             dataHandled = self.DataProcess(dataRecv)
             clientSocket.sendall(dataHandled.encode(CODING))
-            
         except Exception as e:
-            logging.error(f"处理数据时发生错误: {e}")
-            
+            logging.error(f"Error receiving or sending data : {e}")
         finally:
+            self.clientQueue.remove((clientSocket, clientAddress))
             clientSocket.close()
-            logging.info(f"连接 {clientAddress} 已关闭")
-            
         
     def StartServer(self):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as serverSocket:
-            serverSocket.bind((self.host, self.port))
-            serverSocket.listen(5)
-            print(f"服务器启动，监听端口 {self.port}...")
-            
-            while True:
-                try:
-                    clientSocket, clientAddress = serverSocket.accept()
-                    clientHandler = threading.Thread(target=self.HandleClient, args=(clientSocket, clientAddress))
-                    clientHandler.start()
+        try :
+            self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self.serverSocket.setblocking(False)
+            self.serverSocket.bind((self.host, self.port))
+        
+        except socket.error as e:
+            logging.error(f"服务器创建socket失败: {e}")
+        
+        else:
+            self.serverSocket.listen(self.maxConnection)
+            self.serverTh = threading.Thread(target=self.HandleClient)
+            self.serverTh.start()
+            logging.info(f"服务器启动，监听端口 {self.port}...")
                     
-                except Exception as e:
-                    logging.error(f"处理客户端连接时发生错误: {e}")
-
+    #todo:把text传给模型处理，然后返回处理结果
     def DataProcess(self, text):
-        pass #todo:把text传给模型处理，然后返回处理结果
+        pass 
         data = "什么也没做"
         
         return data
