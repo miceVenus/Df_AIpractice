@@ -65,6 +65,10 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+或者使用终端方式(当前仅限于在当前目录使用 无法在全局调用feg命令)
+```bash
+feg [your files] [输出文件位置]
+```
 
 ### 运行服务器
 
