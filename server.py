@@ -9,7 +9,7 @@ HOST = '0.0.0.0'
 # 服务器的端口号
 PORT = 12345 
 CODING= "utf-8"
-MAX_CONNECTIONS = 3
+MAX_CONNECTIONS = 6
 
 class Server:
     def __init__(self, host=HOST, port=PORT, maxConnection=MAX_CONNECTIONS):

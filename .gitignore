@@ -1,0 +1,22 @@
+# 忽略 Python 编译文件
+__pycache__/
+# 忽略环境配置文件
+.env
+*.env
+
+# 忽略日志文件
+*.log
+
+# 忽略虚拟环境目录
+.venv/
+env/
+
+# 忽略操作系统生成的文件
+.DS_Store
+Thumbs.db
+
+# 忽略 IDE/编辑器配置文件
+.vscode/
+
+#忽略本地测试输出库
+output/

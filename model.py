@@ -1,47 +1,54 @@
 
-from ast import arg
+import configparser
 import socket
 import os
 from socketserver import DatagramRequestHandler
-HOST = "192.168.120.183"
-PROT = 12345
-CODING = "utf-8"
+
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+HOST = config.get("server", "HOST")
+PORT = config.getint("server", "PORT")
+CODING = config.get("basic", "CODING")
 
 
 class Model:
     
     def __init__(self):
         self.host = HOST # 服务器的ip地址 记得修改
-        self.port = PROT # 服务器的端口号 记得修改
+        self.port = PORT # 服务器的端口号 记得修改
+        self.clientSocket = None
         
     def ProcessUploadFile(self, fileDirList, outputDir="output"): # 上传文件处理函数
         
         for fileDir in fileDirList:    
             content = self.GetContent(fileDir)
-            dataRecv = self.TryInitSocketAndSendContentAndGetMessage(content)
+            dataRecv = self.TryInitSocketAndSendGetMessage(content)
             self.WriteAsFile(dataRecv, fileDirList, outputDir)
 
-    def ProcessTextIn(self, text, *args) -> str: # 直接输入文本处理函数
-        dataRecv = self.TryInitSocketAndSendContentAndGetMessage(text)
+    def ProcessTextIn(self, text) -> str: # 直接输入文本处理函数
+        dataRecv = self.TryInitSocketAndSendGetMessage(text)
         return dataRecv
         
-    def TryInitSocketAndSendContentAndGetMessage(self, content) -> str:
-        s = self.InitSocket()
+    def TryInitSocketAndSendGetMessage(self, content) -> str:
+        self.TryInitSocket()
+        if self.clientSocket is None:
+            print("Warning : Socket 被初始化为None")
+            return None
+        else:
+            return self.TrySendGetMessage(content)
+    
+    def TrySendGetMessage(self, content) -> str:
         try: 
-            s.sendall(content.encode(CODING))
-            dataRecv = s.recv(65536).decode(CODING)
+            self.clientSocket.sendall(content.encode(CODING))
+            dataRecv = self.clientSocket.recv(65536).decode(CODING)
+            self.clientSocket.close()
             return dataRecv
-        
         except socket.error as se:
-            print(f"Socket 错误: {se}")
-        
-        except Exception as e:
-            print(f"错误: {e}")
-                    
+            print(f"Socket 发送或接受信息错误 返回NONE: {se}")
+            return None
         finally:
-                if s is not None:
-                    s.close()
-
+            self.clientSocket.close()
 
     def WriteAsFile(self, content, fileDirList, outputDir="output"):
         if not os.path.exists(outputDir):
@@ -56,14 +63,13 @@ class Model:
         return fileName
     
     
-    def InitSocket(self):
+    def TryInitSocket(self):
         try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((self.host, self.port))
-            return s
+            self.clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.clientSocket.connect((self.host, self.port))
         
         except socket.error as e:
-            print(f"Socket 错误: {e}")
+            print(f"Socket 初始化错误 返回None: {e}")
             return None
     
                         
