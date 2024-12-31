@@ -15,8 +15,8 @@ CODING = config.get("basic", "CODING")
 class Model:
     
     def __init__(self):
-        self.host = HOST # 服务器的ip地址 记得修改
-        self.port = PORT # 服务器的端口号 记得修改
+        self.host = HOST
+        self.port = PORT 
         self.clientSocket = None
         
     def ProcessUploadFile(self, fileDirList, outputDir="output"): # 上传文件处理函数
@@ -67,7 +67,6 @@ class Model:
         try:
             self.clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.clientSocket.connect((self.host, self.port))
-        
         except socket.error as e:
             print(f"Socket 初始化错误 返回None: {e}")
             return None

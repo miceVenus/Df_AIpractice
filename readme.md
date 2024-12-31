@@ -91,7 +91,7 @@ python server.py
 在 model.py中的 ProcessTextIn和 ProcessUploadFile方法中实现具体的文本处理逻辑。你需要调用后端 API 来处理文本，并返回处理后的字符串。
 修改server文件的DataProcess函数，使其能够正确调用模型的方法，并返回处理后的文本。
 
-直接修改config.ini文件中的server段中的服务器配置即可
+客户端直接修改config.ini文件中的server段中的服务器配置即可
 
 ## 配置环境
 
