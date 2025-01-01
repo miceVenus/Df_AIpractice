@@ -114,6 +114,50 @@ border-width:2px</string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
                <item>
+                <widget class="QComboBox" name="comboBox">
+                 <property name="font">
+                  <font>
+                   <family>Microsoft YaHei UI Light</family>
+                   <pointsize>9</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">
+QComboBox {
+    border-radius: 3px;
+    padding: 1px 2px 1px 2px;  
+    min-width: 9em;  
+
+	border-style:dashed;
+	border-width:2px;
+	border-color:rgb(185, 185, 185);
+	background-color:rgb(238, 238, 238);
+	padding-left: 10px;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 50px;
+
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+</string>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>MT文本摘要模型</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>MT对话摘要模型</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
                 <widget class="QLabel" name="label">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -266,7 +310,7 @@ border-width:2px</string>
               <property name="styleSheet">
                <string notr="true">border:none</string>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>
                 <widget class="QPushButton" name="Mt5Button_3">
                  <property name="sizePolicy">

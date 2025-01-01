@@ -76,6 +76,37 @@ class Ui_Form(object):
         self.verticalWidget.setObjectName("verticalWidget")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.verticalWidget)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.comboBox = QtWidgets.QComboBox(self.verticalWidget)
+        font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI Light")
+        font.setPointSize(9)
+        self.comboBox.setFont(font)
+        self.comboBox.setStyleSheet("\n"
+"QComboBox {\n"
+"    border-radius: 3px;\n"
+"    padding: 1px 2px 1px 2px;  \n"
+"    min-width: 9em;  \n"
+"\n"
+"    border-style:dashed;\n"
+"    border-width:2px;\n"
+"    border-color:rgb(185, 185, 185);\n"
+"    background-color:rgb(238, 238, 238);\n"
+"    padding-left: 10px;\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 50px;\n"
+"\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"")
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.verticalLayout_6.addWidget(self.comboBox)
         self.label = QtWidgets.QLabel(self.verticalWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -167,8 +198,8 @@ class Ui_Form(object):
         self.horizontalWidget_2.setMinimumSize(QtCore.QSize(0, 60))
         self.horizontalWidget_2.setStyleSheet("border:none")
         self.horizontalWidget_2.setObjectName("horizontalWidget_2")
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.horizontalWidget_2)
-        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.horizontalWidget_2)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.Mt5Button_3 = QtWidgets.QPushButton(self.horizontalWidget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -188,7 +219,7 @@ class Ui_Form(object):
         self.Mt5Button_3.setIcon(icon)
         self.Mt5Button_3.setIconSize(QtCore.QSize(32, 32))
         self.Mt5Button_3.setObjectName("Mt5Button_3")
-        self.horizontalLayout_7.addWidget(self.Mt5Button_3)
+        self.verticalLayout_7.addWidget(self.Mt5Button_3)
         self.verticalLayout_5.addWidget(self.horizontalWidget_2)
         self.verticalLayout_3.addWidget(self.verticalWidget_5)
         self.horizontalLayout_2.addWidget(self.verticalWidget_2)
@@ -253,5 +284,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "文本摘要器"))
+        self.comboBox.setItemText(0, _translate("Form", "MT文本摘要模型"))
+        self.comboBox.setItemText(1, _translate("Form", "MT对话摘要模型"))
         self.label.setText(_translate("Form", "文本输入"))
         self.label_7.setText(_translate("Form", "文本输出"))

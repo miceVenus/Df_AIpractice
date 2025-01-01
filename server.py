@@ -26,14 +26,16 @@ class Server:
         while True:
             try:
                 clientSocket, clientAddress = self.serverSocket.accept()
+                logging.info(f"accept, clientSocket:{clientSocket}, Address:{clientAddress}")
+                clientSocket.setblocking(True)
             except Exception as ret:
                 time.sleep(0.01)
             else:
-                self.clientQueue.append((clientSocket, clientAddress))
+                if clientSocket and clientAddress:
+                    self.clientQueue.append((clientSocket, clientAddress))
                 logging.info(f"Socket服务端与IP地址为{clientAddress}的客户端连接")
             
-            for CS, CA in self.clientQueue:
-                clientTh = threading.Thread(target=self.DealRecvAndSend, args=(CS, CA))
+                clientTh = threading.Thread(target=self.DealRecvAndSend, args=(clientSocket, clientAddress))
                 clientTh.start()
 
 
@@ -42,11 +44,21 @@ class Server:
             dataRecv = clientSocket.recv(65536).decode(CODING)
             dataHandled = self.DataProcess(dataRecv)
             clientSocket.sendall(dataHandled.encode(CODING))
-        except Exception as e:
-            logging.error(f"Error receiving or sending data : {e}")
+        
+        except socket.error as e:
+            # if se.errno == 10035:
+                
+            # else:
+                logging.error(f"Error receiving or sending data : {e}")
+            
         finally:
-            self.clientQueue.remove((clientSocket, clientAddress))
-            clientSocket.close()
+            if (clientSocket, clientAddress) in self.clientQueue:
+                self.clientQueue.remove((clientSocket, clientAddress))
+            
+            try:
+                clientSocket.close()
+            except Exception as e:
+                logging.error(f"Error closing socket: {e}")
         
     def StartServer(self):
         try :
@@ -66,7 +78,7 @@ class Server:
                     
     #todo:把text传给模型处理，然后返回处理结果
     def DataProcess(self, text):
-        pass 
+        time.sleep(1)
         data = "什么也没做"
         
         return data
