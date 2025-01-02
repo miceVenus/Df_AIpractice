@@ -21,11 +21,12 @@ class Controller:
         self.view.textOutMt5.clear()
         
         textIn = self.view.textIn.toPlainText()
+        modelType = self.view.modelType.currentText()
         
         if not self.judge(textIn):
             return
         
-        text = self.model.ProcessTextIn(textIn)
+        text = self.model.ProcessTextIn(textIn, modelType)
         self.view.textOutMt5.setText(text)
         
     def OpenFileDialog(self):
@@ -41,7 +42,8 @@ class Controller:
             self.view.upload.setText(fileNames)
     
     def AckOpenFile(self):
-        self.model.ProcessUploadFile(self.selectedFileList)
+        modelType = self.view.modelType.currentText()
+        self.model.ProcessUploadFile(self.selectedFileList,modelType)
         self.view.upload.setText("")
         self.view.upload.setIcon(QIcon("asset/upload.png"))
             

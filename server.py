@@ -1,3 +1,4 @@
+from ast import Tuple
 import socket
 import threading
 import logging
@@ -76,12 +77,25 @@ class Server:
             self.serverTh.start()
             logging.info(f"服务器启动，监听端口 {self.port}...")
                     
+    def DataProcess(self, text: str):
+        modelType, content = tuple(text.split("?", maxsplit=1))
+        if modelType == "MT文本摘要模型":
+            return modelType + " " +self.TextModel(content)
+        else:
+            return modelType + " " + self.DialogModel(content)
+    
+    
     #todo:把text传给模型处理，然后返回处理结果
-    def DataProcess(self, text):
+    def TextModel(self, text):
         time.sleep(1)
         data = "什么也没做"
-        
         return data
+    
+    def DialogModel(self, text):
+        time.sleep(2)
+        data = "什么也没做"
+        return data
+    
     
 if __name__ == "__main__":
     Server = Server()

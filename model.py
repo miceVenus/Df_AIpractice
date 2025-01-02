@@ -18,15 +18,19 @@ class Model:
         self.host = HOST
         self.port = PORT 
         self.clientSocket = None
-        
-    def ProcessUploadFile(self, fileDirList, outputDir="output"): # 上传文件处理函数
-        
+        self.modelType = None
+    
+    # 上传文件处理函数
+    def ProcessUploadFile(self, fileDirList, modelType , outputDir="output"): 
+        self.modelType = modelType
         for fileDir in fileDirList:    
             content = self.GetContent(fileDir)
-            dataRecv = self.TryInitSocketAndSendGetMessage(content)
+            dataRecv = self.TryInitSocketAndSendGetMessage(content, modelType)
             self.WriteAsFile(dataRecv, fileDirList, outputDir)
-
-    def ProcessTextIn(self, text) -> str: # 直接输入文本处理函数
+            
+    # 直接输入文本处理函数
+    def ProcessTextIn(self, text, modelType) -> str:
+        self.modelType = modelType
         dataRecv = self.TryInitSocketAndSendGetMessage(text)
         return dataRecv
         
@@ -38,8 +42,10 @@ class Model:
         else:
             return self.TrySendGetMessage(content)
     
-    def TrySendGetMessage(self, content) -> str:
+    # 传递数据构成：ModelType?text在服务端以字符串操作进行分离 
+    def TrySendGetMessage(self, text) -> str:
         try: 
+            content = self.modelType + "?" + text
             self.clientSocket.sendall(content.encode(CODING))
             dataRecv = self.clientSocket.recv(65536).decode(CODING)
             self.clientSocket.close()

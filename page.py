@@ -26,6 +26,9 @@ class Ui_Form(object):
         font.setFamily("Microsoft YaHei")
         font.setPointSize(12)
         Form.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("asset/text.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Form.setWindowIcon(icon)
         Form.setLayoutDirection(QtCore.Qt.LeftToRight)
         Form.setStyleSheet("")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Form)
@@ -37,7 +40,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.horizontalWidget.sizePolicy().hasHeightForWidth())
         self.horizontalWidget.setSizePolicy(sizePolicy)
         self.horizontalWidget.setMaximumSize(QtCore.QSize(1920, 1080))
-        self.horizontalWidget.setStyleSheet("background-color:rgba(238, 238, 238, 70)")
+        self.horizontalWidget.setStyleSheet("background-color:rgba(238, 238, 238, 100)")
         self.horizontalWidget.setObjectName("horizontalWidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalWidget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -76,12 +79,12 @@ class Ui_Form(object):
         self.verticalWidget.setObjectName("verticalWidget")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.verticalWidget)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.comboBox = QtWidgets.QComboBox(self.verticalWidget)
+        self.modelType = QtWidgets.QComboBox(self.verticalWidget)
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei UI Light")
         font.setPointSize(9)
-        self.comboBox.setFont(font)
-        self.comboBox.setStyleSheet("\n"
+        self.modelType.setFont(font)
+        self.modelType.setStyleSheet("\n"
 "QComboBox {\n"
 "    border-radius: 3px;\n"
 "    padding: 1px 2px 1px 2px;  \n"
@@ -103,10 +106,10 @@ class Ui_Form(object):
 "}\n"
 "\n"
 "")
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.verticalLayout_6.addWidget(self.comboBox)
+        self.modelType.setObjectName("modelType")
+        self.modelType.addItem("")
+        self.modelType.addItem("")
+        self.verticalLayout_6.addWidget(self.modelType)
         self.label = QtWidgets.QLabel(self.verticalWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -214,9 +217,9 @@ class Ui_Form(object):
 "border-color:rgb(200, 200, 200);\n"
 "border-width:2px")
         self.Mt5Button_3.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("asset/textout1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.Mt5Button_3.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("asset/textout1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.Mt5Button_3.setIcon(icon1)
         self.Mt5Button_3.setIconSize(QtCore.QSize(32, 32))
         self.Mt5Button_3.setObjectName("Mt5Button_3")
         self.verticalLayout_7.addWidget(self.Mt5Button_3)
@@ -249,9 +252,9 @@ class Ui_Form(object):
 "border-color:rgb(185, 185, 185);\n"
 "border-width:2px")
         self.upload.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("asset/upload.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.upload.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("asset/upload.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.upload.setIcon(icon2)
         self.upload.setIconSize(QtCore.QSize(100, 100))
         self.upload.setObjectName("upload")
         self.verticalLayout_4.addWidget(self.upload)
@@ -269,9 +272,9 @@ class Ui_Form(object):
 "border-color:rgb(185, 185, 185);\n"
 "border-width:2px")
         self.AckButton.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("asset/ack3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.AckButton.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("asset/ack3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.AckButton.setIcon(icon3)
         self.AckButton.setIconSize(QtCore.QSize(64, 64))
         self.AckButton.setObjectName("AckButton")
         self.verticalLayout_4.addWidget(self.AckButton)
@@ -284,7 +287,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "文本摘要器"))
-        self.comboBox.setItemText(0, _translate("Form", "MT文本摘要模型"))
-        self.comboBox.setItemText(1, _translate("Form", "MT对话摘要模型"))
+        self.modelType.setItemText(0, _translate("Form", "MT文本摘要模型"))
+        self.modelType.setItemText(1, _translate("Form", "MT对话摘要模型"))
         self.label.setText(_translate("Form", "文本输入"))
         self.label_7.setText(_translate("Form", "文本输出"))
