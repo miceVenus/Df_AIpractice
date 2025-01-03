@@ -2,14 +2,18 @@
 import configparser
 import socket
 import os
-from socketserver import DatagramRequestHandler
 
+BASIC_DIR = os.path.dirname(os.path.abspath(__file__))
 config = configparser.ConfigParser()
-config.read("config.ini")
+
+config.read(os.path.join(BASIC_DIR, "config.ini"))
 
 HOST = config.get("server", "HOST")
 PORT = config.getint("server", "PORT")
 CODING = config.get("basic", "CODING")
+OUTPUT_DIR = config.get("basic", "OUTPUT_DIR")
+if OUTPUT_DIR == "None":
+    OUTPUT_DIR = "output"
 
 
 class Model:
@@ -17,16 +21,17 @@ class Model:
     def __init__(self):
         self.host = HOST
         self.port = PORT 
+        self.outputDir = OUTPUT_DIR
         self.clientSocket = None
         self.modelType = None
     
     # 上传文件处理函数
-    def ProcessUploadFile(self, fileDirList, modelType , outputDir="output"): 
+    def ProcessUploadFile(self, fileDirList, modelType): 
         self.modelType = modelType
         for fileDir in fileDirList:    
             content = self.GetContent(fileDir)
             dataRecv = self.TryInitSocketAndSendGetMessage(content, modelType)
-            self.WriteAsFile(dataRecv, fileDirList, outputDir)
+            self.WriteAsFile(dataRecv, fileDirList)
             
     # 直接输入文本处理函数
     def ProcessTextIn(self, text, modelType) -> str:
@@ -56,13 +61,13 @@ class Model:
         finally:
             self.clientSocket.close()
 
-    def WriteAsFile(self, content, fileDirList, outputDir="output"):
-        if not os.path.exists(outputDir):
-            os.mkdir(outputDir)
+    def WriteAsFile(self, content, fileDirList):
+        if not os.path.exists(self.outputDir):
+            os.mkdir(self.outputDir)
         
         for fileDir in fileDirList:
             fileName = self.GetFileName(fileDir)
-            self.WriteContentToFile(content, fileName, outputDir)
+            self.WriteContentToFile(content, fileName)
             
     def GetFileName(self, fileDir):
         fileName = fileDir.split("/")[-1]
@@ -85,8 +90,8 @@ class Model:
             
         return content
     
-    def WriteContentToFile(self, content, fileName, outputDir):
-        with open(f"{outputDir}/{fileName}.txt", mode='w', encoding=CODING) as file:
+    def WriteContentToFile(self, content, fileName):
+        with open(f"{self.outputDir}/{fileName}.txt", mode='w', encoding=CODING) as file:
             file.write(content) 
         file.close()
     

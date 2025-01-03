@@ -1,45 +1,27 @@
 # Text Processing Application
 
-这是一个简单的文本处理应用程序，使用socket API 与后端模型进行通信
-使用 PyQt5 构建图形用户界面（GUI），并使用 MVC（Model-View-Controller）模式组织代码。
+这是一个简单的文本处理应用程序，使用 socket API 与后端模型进行通信。该应用程序使用 PyQt5 构建图形用户界面（GUI），并使用 MVC（Model-View-Controller）模式组织代码。
 
 ## 目录结构
 
 ```
-/d:/1code/python/bachelor/grade 4/semester 1/Df_AIpractice/
-    ├── 
-
-controller.py
-
-
-    ├──
-
-feg.bat
-
-    ├──
-
-feg.py
-
-    ├── 
-
-main.py
-
-
-    ├── 
-
-model.py
-
-
-    ├── 
-
-page.py
-
-
-    ├── 
-
-server.py
-
-
+Df_AIpractice/
+    ├── client
+            ├── asset
+            ├── config.ini
+            ├── controller.py
+            ├── feg.bat
+            ├── feg.py
+            ├── main.py
+            ├── model.py
+            ├── page.py
+            ├── page.ui
+    ├── server
+            ├── server.py
+    ├── test
+            ├── fixture.py
+            ├── test_mulThread.py
+    ├── requirement.txt
     └── README.md
 ```
 

@@ -1,5 +1,4 @@
 import argparse
-from tabnanny import verbose
 from model import Model
 
 def main():

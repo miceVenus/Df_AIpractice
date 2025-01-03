@@ -151,12 +151,12 @@ QComboBox::drop-down {
                  </property>
                  <item>
                   <property name="text">
-                   <string>MT文本摘要模型</string>
+                   <string>MT5文本摘要模型</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>MT对话摘要模型</string>
+                   <string>MT5对话摘要模型</string>
                   </property>
                  </item>
                 </widget>

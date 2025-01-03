@@ -1,4 +1,3 @@
-from ast import Tuple
 import socket
 import threading
 import logging
@@ -79,7 +78,7 @@ class Server:
                     
     def DataProcess(self, text: str):
         modelType, content = tuple(text.split("?", maxsplit=1))
-        if modelType == "MT文本摘要模型":
+        if modelType == "MT5文本摘要模型":
             return modelType + " " +self.TextModel(content)
         else:
             return modelType + " " + self.DialogModel(content)
