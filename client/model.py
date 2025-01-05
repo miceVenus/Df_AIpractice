@@ -36,7 +36,7 @@ class Model:
         for fileDir in fileDirList:    
             content = self.GetContent(fileDir)
             dataRecv = self.TryInitSocketAndSendGetMessage(content)
-            self.WriteAsFile(dataRecv, fileDirList)
+            self.WriteAsFile(dataRecv, fileDir)
             
     # 直接输入文本处理函数
     def ProcessTextIn(self, text, modelType) -> str:
@@ -58,6 +58,7 @@ class Model:
             content = self.modelType + "?" + text
             self.clientSocket.sendall(content.encode(CODING))
             dataRecv = self.clientSocket.recv(65536).decode(CODING)
+            print(f"接收到来自{self.host}的数据:\n {dataRecv}")
             self.clientSocket.close()
             return dataRecv
         except socket.error as se:
@@ -66,13 +67,11 @@ class Model:
         finally:
             self.clientSocket.close()
 
-    def WriteAsFile(self, content, fileDirList):
+    def WriteAsFile(self, content, fileDir):
         if not os.path.exists(self.outputDir):
             os.mkdir(self.outputDir)
-        
-        for fileDir in fileDirList:
-            fileName = self.GetFileName(fileDir)
-            self.WriteContentToFile(content, fileName)
+        fileName = self.GetFileName(fileDir)
+        self.WriteContentToFile(content, fileName)
             
     def GetFileName(self, fileDir):
         fileName = fileDir.split("/")[-1]

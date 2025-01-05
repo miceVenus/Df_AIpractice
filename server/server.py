@@ -1,3 +1,4 @@
+from random import randint
 import socket
 import threading
 import logging
@@ -42,7 +43,9 @@ class Server:
     def DealRecvAndSend(self, clientSocket, clientAddress):
         try:
             dataRecv = clientSocket.recv(65536).decode(CODING)
+            logging.info(f"接收到来自{clientSocket}的数据:\n {dataRecv}")
             dataHandled = self.DataProcess(dataRecv)
+            logging.info(f"处理后的数据:\n {dataHandled}")
             clientSocket.sendall(dataHandled.encode(CODING))
         
         except socket.error as e:
@@ -84,7 +87,7 @@ class Server:
     #todo:把text传给模型处理，然后返回处理结果
     def TextModel(self, text):
         time.sleep(1)
-        data = "什么也没做"
+        data = str(randint(0, 100))
         return data
     
     def DialogModel(self, text):
