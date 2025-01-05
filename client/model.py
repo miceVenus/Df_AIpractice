@@ -1,5 +1,6 @@
 
 import configparser
+from email.policy import default
 import socket
 import os
 
@@ -15,6 +16,10 @@ OUTPUT_DIR = config.get("basic", "OUTPUT_DIR")
 if OUTPUT_DIR == "None":
     OUTPUT_DIR = "output"
 
+default_host = config.get("default", "default_host")
+default_port = config.getint("default", "default_port")
+default_coding = config.get("default", "default_coding")
+default_output_dir = config.get("default", "default_output_dir")
 
 class Model:
     
@@ -73,6 +78,22 @@ class Model:
         fileName = fileDir.split("/")[-1]
         return fileName
     
+    def GetConfig(self):
+        
+        return (self.host, str(self.port), CODING, self.outputDir)
+    
+    def WriteConfig(self, settingTuple):
+        self.host, port, CODING, self.outputDir = settingTuple
+        self.port = int(port)
+        
+        config.set("server", "HOST", self.host)
+        config.set("server", "PORT", str(self.port))
+        config.set("basic", "CODING", CODING)
+        config.set("basic", "OUTPUT_DIR", self.outputDir)
+        
+        with open(os.path.join(BASIC_DIR, "config.ini"), mode='w') as file:
+            config.write(file)
+        file.close()
     
     def TryInitSocket(self):
         try:
@@ -89,6 +110,9 @@ class Model:
             file.close()
             
         return content
+    
+    def GetDefaultConfig(self):
+        return (default_host, str(default_port), default_coding, default_output_dir)
     
     def WriteContentToFile(self, content, fileName):
         with open(f"{self.outputDir}/{fileName}.txt", mode='w', encoding=CODING) as file:

@@ -46,9 +46,6 @@ class Server:
             clientSocket.sendall(dataHandled.encode(CODING))
         
         except socket.error as e:
-            # if se.errno == 10035:
-                
-            # else:
                 logging.error(f"Error receiving or sending data : {e}")
             
         finally:

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1158, 800)
+        Form.resize(1231, 903)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -31,20 +31,139 @@ class Ui_Form(object):
         Form.setWindowIcon(icon)
         Form.setLayoutDirection(QtCore.Qt.LeftToRight)
         Form.setStyleSheet("")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(Form)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.horizontalWidget = QtWidgets.QWidget(Form)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalWidget = QtWidgets.QWidget(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.verticalWidget.sizePolicy().hasHeightForWidth())
+        self.verticalWidget.setSizePolicy(sizePolicy)
+        self.verticalWidget.setMaximumSize(QtCore.QSize(1920, 1080))
+        self.verticalWidget.setStyleSheet("background-color:#F5F5F5")
+        self.verticalWidget.setObjectName("verticalWidget")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.verticalWidget)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.horizontalWidget = QtWidgets.QWidget(self.verticalWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.horizontalWidget.sizePolicy().hasHeightForWidth())
         self.horizontalWidget.setSizePolicy(sizePolicy)
-        self.horizontalWidget.setMaximumSize(QtCore.QSize(1920, 1080))
-        self.horizontalWidget.setStyleSheet("background-color:rgba(238, 238, 238, 100)")
+        self.horizontalWidget.setMinimumSize(QtCore.QSize(1186, 0))
+        self.horizontalWidget.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.horizontalWidget.setStyleSheet("background-color:#616161;\n"
+"border-style:solid;\n"
+"border-bottom-width:2px;\n"
+"border-radius:3px;\n"
+"border-color:#BDBDBD;")
         self.horizontalWidget.setObjectName("horizontalWidget")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalWidget)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalWidget)
+        self.horizontalLayout_4.setContentsMargins(2, 10, 0, 10)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.horizontalWidget_3 = QtWidgets.QWidget(self.horizontalWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.horizontalWidget_3.sizePolicy().hasHeightForWidth())
+        self.horizontalWidget_3.setSizePolicy(sizePolicy)
+        self.horizontalWidget_3.setMinimumSize(QtCore.QSize(0, 0))
+        self.horizontalWidget_3.setMaximumSize(QtCore.QSize(270, 1080))
+        self.horizontalWidget_3.setAutoFillBackground(False)
+        self.horizontalWidget_3.setStyleSheet("border:none\n"
+"")
+        self.horizontalWidget_3.setObjectName("horizontalWidget_3")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.horizontalWidget_3)
+        self.horizontalLayout_6.setContentsMargins(8, 0, 8, 0)
+        self.horizontalLayout_6.setSpacing(10)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.main_page = QtWidgets.QPushButton(self.horizontalWidget_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.main_page.sizePolicy().hasHeightForWidth())
+        self.main_page.setSizePolicy(sizePolicy)
+        self.main_page.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.main_page.setStyleSheet("background-color:#607D8B;\n"
+"border:solid;\n"
+"border-radius:3px;\n"
+"border-color:#616161;\n"
+"padding:10px\n"
+"\n"
+"")
+        self.main_page.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("asset/home.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.main_page.setIcon(icon1)
+        self.main_page.setIconSize(QtCore.QSize(32, 32))
+        self.main_page.setObjectName("main_page")
+        self.horizontalLayout_6.addWidget(self.main_page)
+        self.news_excert = QtWidgets.QPushButton(self.horizontalWidget_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.news_excert.sizePolicy().hasHeightForWidth())
+        self.news_excert.setSizePolicy(sizePolicy)
+        self.news_excert.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.news_excert.setStyleSheet("background-color:#607D8B;\n"
+"border:solid;\n"
+"border-radius:3px;\n"
+"border-color:#616161;\n"
+"padding:10px\n"
+"\n"
+"")
+        self.news_excert.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("asset/news.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.news_excert.setIcon(icon2)
+        self.news_excert.setIconSize(QtCore.QSize(32, 32))
+        self.news_excert.setObjectName("news_excert")
+        self.horizontalLayout_6.addWidget(self.news_excert)
+        self.setting = QtWidgets.QPushButton(self.horizontalWidget_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.setting.sizePolicy().hasHeightForWidth())
+        self.setting.setSizePolicy(sizePolicy)
+        self.setting.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.setting.setStyleSheet("background-color:#607D8B;\n"
+"border:solid;\n"
+"border-radius:3px;\n"
+"border-color:#616161;\n"
+"padding:10px\n"
+"\n"
+"")
+        self.setting.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("asset/setting.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setting.setIcon(icon3)
+        self.setting.setIconSize(QtCore.QSize(32, 32))
+        self.setting.setObjectName("setting")
+        self.horizontalLayout_6.addWidget(self.setting)
+        self.horizontalLayout_4.addWidget(self.horizontalWidget_3)
+        self.verticalWidget1 = QtWidgets.QWidget(self.horizontalWidget)
+        self.verticalWidget1.setStyleSheet("border:none\n"
+"")
+        self.verticalWidget1.setObjectName("verticalWidget1")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.verticalWidget1)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.horizontalLayout_4.addWidget(self.verticalWidget1)
+        self.verticalLayout_9.addWidget(self.horizontalWidget, 0, QtCore.Qt.AlignLeft)
+        self.horizontalWidget_2 = QtWidgets.QWidget(self.verticalWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.horizontalWidget_2.sizePolicy().hasHeightForWidth())
+        self.horizontalWidget_2.setSizePolicy(sizePolicy)
+        self.horizontalWidget_2.setMaximumSize(QtCore.QSize(1920, 1080))
+        self.horizontalWidget_2.setStyleSheet("")
+        self.horizontalWidget_2.setObjectName("horizontalWidget_2")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalWidget_2)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setSpacing(10)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.verticalWidget_2 = QtWidgets.QWidget(self.horizontalWidget)
+        self.verticalWidget_2 = QtWidgets.QWidget(self.horizontalWidget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -54,10 +173,11 @@ class Ui_Form(object):
         self.verticalWidget_2.setMaximumSize(QtCore.QSize(400, 16777215))
         self.verticalWidget_2.setStyleSheet("border:solid;\n"
 "border-radius:3px;\n"
-"border-color:rgb(185, 185, 185);\n"
+"border-color:#BDBDBD;\n"
 "border-width:2px")
         self.verticalWidget_2.setObjectName("verticalWidget_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalWidget_2)
+        self.verticalLayout_3.setContentsMargins(3, 3, 3, 3)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalWidget_5 = QtWidgets.QWidget(self.verticalWidget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -70,20 +190,23 @@ class Ui_Form(object):
         self.verticalWidget_5.setObjectName("verticalWidget_5")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.verticalWidget_5)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.verticalWidget = QtWidgets.QWidget(self.verticalWidget_5)
+        self.verticalWidget2 = QtWidgets.QWidget(self.verticalWidget_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.verticalWidget.sizePolicy().hasHeightForWidth())
-        self.verticalWidget.setSizePolicy(sizePolicy)
-        self.verticalWidget.setObjectName("verticalWidget")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.verticalWidget)
+        sizePolicy.setHeightForWidth(self.verticalWidget2.sizePolicy().hasHeightForWidth())
+        self.verticalWidget2.setSizePolicy(sizePolicy)
+        self.verticalWidget2.setStyleSheet("background-color:#F5F5F5")
+        self.verticalWidget2.setObjectName("verticalWidget2")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.verticalWidget2)
+        self.verticalLayout_6.setContentsMargins(-1, -1, -1, 0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.modelType = QtWidgets.QComboBox(self.verticalWidget)
+        self.modelType = QtWidgets.QComboBox(self.verticalWidget2)
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei UI Light")
         font.setPointSize(9)
         self.modelType.setFont(font)
+        self.modelType.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.modelType.setStyleSheet("\n"
 "QComboBox {\n"
 "    border-radius: 3px;\n"
@@ -92,8 +215,8 @@ class Ui_Form(object):
 "\n"
 "    border-style:dashed;\n"
 "    border-width:2px;\n"
-"    border-color:rgb(185, 185, 185);\n"
-"    background-color:rgb(238, 238, 238);\n"
+"    border-color:#616161;\n"
+"    background-color:#F5F5F5;\n"
 "    padding-left: 10px;\n"
 "}\n"
 "QComboBox::drop-down {\n"
@@ -110,7 +233,7 @@ class Ui_Form(object):
         self.modelType.addItem("")
         self.modelType.addItem("")
         self.verticalLayout_6.addWidget(self.modelType)
-        self.label = QtWidgets.QLabel(self.verticalWidget)
+        self.label = QtWidgets.QLabel(self.verticalWidget2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -125,7 +248,7 @@ class Ui_Form(object):
 "")
         self.label.setObjectName("label")
         self.verticalLayout_6.addWidget(self.label)
-        self.textIn = QtWidgets.QTextEdit(self.verticalWidget)
+        self.textIn = QtWidgets.QTextEdit(self.verticalWidget2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(6)
         sizePolicy.setVerticalStretch(0)
@@ -142,38 +265,43 @@ class Ui_Form(object):
         self.textIn.setStyleSheet("margin-bottom: 10px;\n"
 "border:solid;\n"
 "border-radius:3px;\n"
-"border-color:rgb(185, 185, 185);\n"
+"border-color:#616161;\n"
 "border-width:2px\n"
 "\n"
 "")
         self.textIn.setObjectName("textIn")
         self.verticalLayout_6.addWidget(self.textIn)
-        self.verticalLayout_5.addWidget(self.verticalWidget)
-        self.verticalWidget1 = QtWidgets.QWidget(self.verticalWidget_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
+        self.verticalLayout_5.addWidget(self.verticalWidget2)
+        self.horizontalWidget_4 = QtWidgets.QWidget(self.verticalWidget_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.verticalWidget1.sizePolicy().hasHeightForWidth())
-        self.verticalWidget1.setSizePolicy(sizePolicy)
-        self.verticalWidget1.setStyleSheet("border:none")
-        self.verticalWidget1.setObjectName("verticalWidget1")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalWidget1)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.label_7 = QtWidgets.QLabel(self.verticalWidget1)
+        sizePolicy.setHeightForWidth(self.horizontalWidget_4.sizePolicy().hasHeightForWidth())
+        self.horizontalWidget_4.setSizePolicy(sizePolicy)
+        self.horizontalWidget_4.setMinimumSize(QtCore.QSize(0, 60))
+        self.horizontalWidget_4.setStyleSheet("border:none;\n"
+"background-color:#F5F5F5")
+        self.horizontalWidget_4.setObjectName("horizontalWidget_4")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.horizontalWidget_4)
+        self.verticalLayout_7.setContentsMargins(-1, 0, -1, -1)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.label_2 = QtWidgets.QLabel(self.horizontalWidget_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_7.sizePolicy().hasHeightForWidth())
-        self.label_7.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei UI Light")
         font.setPointSize(12)
-        self.label_7.setFont(font)
-        self.label_7.setStyleSheet("border:none;\n"
-"margin-bottom:10px")
-        self.label_7.setObjectName("label_7")
-        self.verticalLayout.addWidget(self.label_7)
-        self.textOutMt5 = QtWidgets.QTextEdit(self.verticalWidget1)
+        self.label_2.setFont(font)
+        self.label_2.setStyleSheet("border:none;\n"
+"margin-bottom:10px\n"
+"")
+        self.label_2.setWordWrap(False)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_7.addWidget(self.label_2)
+        self.textOutMt5 = QtWidgets.QTextEdit(self.horizontalWidget_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -186,24 +314,12 @@ class Ui_Form(object):
         self.textOutMt5.setFont(font)
         self.textOutMt5.setStyleSheet("border:solid;\n"
 "border-radius:3px;\n"
-"border-color:rgb(185, 185, 185);\n"
+"border-color:#616161;\n"
 "border-width:2px")
         self.textOutMt5.setReadOnly(True)
         self.textOutMt5.setObjectName("textOutMt5")
-        self.verticalLayout.addWidget(self.textOutMt5)
-        self.verticalLayout_5.addWidget(self.verticalWidget1)
-        self.horizontalWidget_2 = QtWidgets.QWidget(self.verticalWidget_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.horizontalWidget_2.sizePolicy().hasHeightForWidth())
-        self.horizontalWidget_2.setSizePolicy(sizePolicy)
-        self.horizontalWidget_2.setMinimumSize(QtCore.QSize(0, 60))
-        self.horizontalWidget_2.setStyleSheet("border:none")
-        self.horizontalWidget_2.setObjectName("horizontalWidget_2")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.horizontalWidget_2)
-        self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.Mt5Button_3 = QtWidgets.QPushButton(self.horizontalWidget_2)
+        self.verticalLayout_7.addWidget(self.textOutMt5)
+        self.Mt5Button_3 = QtWidgets.QPushButton(self.horizontalWidget_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -214,33 +330,36 @@ class Ui_Form(object):
         self.Mt5Button_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Mt5Button_3.setStyleSheet("border:solid;\n"
 "border-radius:3px;\n"
-"border-color:rgb(200, 200, 200);\n"
-"border-width:2px")
+"border-color:#BDBDBD;\n"
+"border-width:2px;\n"
+"background-color:#607D8B;")
         self.Mt5Button_3.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("asset/textout1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.Mt5Button_3.setIcon(icon1)
-        self.Mt5Button_3.setIconSize(QtCore.QSize(32, 32))
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("asset/textout1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.Mt5Button_3.setIcon(icon4)
+        self.Mt5Button_3.setIconSize(QtCore.QSize(48, 48))
         self.Mt5Button_3.setObjectName("Mt5Button_3")
         self.verticalLayout_7.addWidget(self.Mt5Button_3)
-        self.verticalLayout_5.addWidget(self.horizontalWidget_2)
+        self.verticalLayout_5.addWidget(self.horizontalWidget_4)
         self.verticalLayout_3.addWidget(self.verticalWidget_5)
         self.horizontalLayout_2.addWidget(self.verticalWidget_2)
-        self.verticalWidget_21 = QtWidgets.QWidget(self.horizontalWidget)
+        self.verticalWidget_4 = QtWidgets.QWidget(self.horizontalWidget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.verticalWidget_21.sizePolicy().hasHeightForWidth())
-        self.verticalWidget_21.setSizePolicy(sizePolicy)
-        self.verticalWidget_21.setMinimumSize(QtCore.QSize(400, 0))
-        self.verticalWidget_21.setStyleSheet("border:solid;\n"
+        sizePolicy.setHeightForWidth(self.verticalWidget_4.sizePolicy().hasHeightForWidth())
+        self.verticalWidget_4.setSizePolicy(sizePolicy)
+        self.verticalWidget_4.setMinimumSize(QtCore.QSize(400, 0))
+        self.verticalWidget_4.setStyleSheet("border:solid;\n"
 "border-radius:3px;\n"
 "border-color:rgb(185, 185, 185);\n"
 "border-width:2px")
-        self.verticalWidget_21.setObjectName("verticalWidget_21")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalWidget_21)
+        self.verticalWidget_4.setObjectName("verticalWidget_4")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalWidget_4)
+        self.verticalLayout_4.setContentsMargins(15, 15, 15, 15)
+        self.verticalLayout_4.setSpacing(22)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.upload = QtWidgets.QPushButton(self.verticalWidget_21)
+        self.upload = QtWidgets.QPushButton(self.verticalWidget_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -249,37 +368,42 @@ class Ui_Form(object):
         self.upload.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.upload.setStyleSheet("border:dashed;\n"
 "border-radius:3px;\n"
-"border-color:rgb(185, 185, 185);\n"
-"border-width:2px")
+"border-color:#616161;\n"
+"border-width:2px;\n"
+"background-color:#F5F5F5")
         self.upload.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("asset/upload.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.upload.setIcon(icon2)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("asset/upload.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.upload.setIcon(icon5)
         self.upload.setIconSize(QtCore.QSize(100, 100))
         self.upload.setObjectName("upload")
         self.verticalLayout_4.addWidget(self.upload)
-        self.AckButton = QtWidgets.QPushButton(self.verticalWidget_21)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.AckButton = QtWidgets.QPushButton(self.verticalWidget_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.AckButton.sizePolicy().hasHeightForWidth())
         self.AckButton.setSizePolicy(sizePolicy)
-        self.AckButton.setMinimumSize(QtCore.QSize(0, 90))
+        self.AckButton.setMinimumSize(QtCore.QSize(0, 103))
         self.AckButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.AckButton.setMouseTracking(False)
         self.AckButton.setStyleSheet("border:solid;\n"
 "border-radius:3px;\n"
-"border-color:rgb(185, 185, 185);\n"
-"border-width:2px")
+"border-color:#BDBDBD;\n"
+"border-width:2px;\n"
+"background-color:#607D8B;\n"
+"\n"
+"margin-bottom:18px")
         self.AckButton.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("asset/ack3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.AckButton.setIcon(icon3)
-        self.AckButton.setIconSize(QtCore.QSize(64, 64))
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("asset/ack3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.AckButton.setIcon(icon6)
+        self.AckButton.setIconSize(QtCore.QSize(48, 48))
         self.AckButton.setObjectName("AckButton")
         self.verticalLayout_4.addWidget(self.AckButton)
-        self.horizontalLayout_2.addWidget(self.verticalWidget_21)
-        self.verticalLayout_2.addWidget(self.horizontalWidget)
+        self.horizontalLayout_2.addWidget(self.verticalWidget_4)
+        self.verticalLayout_9.addWidget(self.horizontalWidget_2)
+        self.verticalLayout.addWidget(self.verticalWidget)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -287,7 +411,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "文本摘要器"))
-        self.modelType.setItemText(0, _translate("Form", "MT文本摘要模型"))
-        self.modelType.setItemText(1, _translate("Form", "MT对话摘要模型"))
+        self.modelType.setItemText(0, _translate("Form", "MT5文本摘要模型"))
+        self.modelType.setItemText(1, _translate("Form", "MT5对话摘要模型"))
         self.label.setText(_translate("Form", "文本输入"))
-        self.label_7.setText(_translate("Form", "文本输出"))
+        self.label_2.setText(_translate("Form", "文本输出"))

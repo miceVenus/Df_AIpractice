@@ -1,7 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog
 from model import Model
 from page  import Ui_Form
+from setting import Ui_Dialog
 from controller import Controller
 
 if __name__ == "__main__":
@@ -9,11 +10,15 @@ if __name__ == "__main__":
     
     model = Model()
     
-    ui  = QWidget()
+    viewUi  = QWidget()
     view = Ui_Form()
-    view.setupUi(ui)
+    view.setupUi(viewUi)
     
-    controller = Controller(model, view)
+    settingUi = QDialog()
+    setting = Ui_Dialog()
+    setting.setupUi(settingUi)
     
-    ui.show()
+    controller = Controller(model, view, setting)
+    
+    viewUi.show()
     sys.exit(app.exec_())
