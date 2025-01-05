@@ -14,11 +14,7 @@ if __name__ == "__main__":
     view = Ui_Form()
     view.setupUi(viewUi)
     
-    settingUi = QDialog()
-    setting = Ui_Dialog()
-    setting.setupUi(settingUi)
-    
-    controller = Controller(model, view, setting)
+    controller = Controller(model, view)
     
     viewUi.show()
     sys.exit(app.exec_())

@@ -35,7 +35,7 @@ class Model:
         self.modelType = modelType
         for fileDir in fileDirList:    
             content = self.GetContent(fileDir)
-            dataRecv = self.TryInitSocketAndSendGetMessage(content, modelType)
+            dataRecv = self.TryInitSocketAndSendGetMessage(content)
             self.WriteAsFile(dataRecv, fileDirList)
             
     # 直接输入文本处理函数
