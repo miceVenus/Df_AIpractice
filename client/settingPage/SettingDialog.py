@@ -1,43 +1,43 @@
 from PyQt5.QtWidgets import QMessageBox, QDialog
 from model import Model
-from setting import Ui_Dialog
+from settingPage.setting import Ui_Dialog
 
 class SettingDialog(QDialog):
-    def __init__(self, model : Model, page : Ui_Dialog):
+    def __init__(self, model : Model):
         super().__init__()
         self.model = model
-        self.page = page
-        self.page.setupUi(self)
-        self.page.saveButton.clicked.connect(self.SaveSetting)
-        self.page.resetButton.clicked.connect(self.ResetSetting)
+        self.pageUi = Ui_Dialog()
+        self.pageUi.setupUi(self)
+        self.pageUi.saveButton.clicked.connect(self.SaveSetting)
+        self.pageUi.resetButton.clicked.connect(self.ResetSetting)
         self.LoadingSetting()
     
     def LoadingSetting(self):
         settingTuple = self.model.GetConfig()   
-        self.page.serverIp.setText(settingTuple[0])
-        self.page.serverPort.setText(settingTuple[1])
-        self.page.coding.setText(settingTuple[2])
-        self.page.outputDir.setText(settingTuple[3])
+        self.pageUi.serverIp.setText(settingTuple[0])
+        self.pageUi.serverPort.setText(settingTuple[1])
+        self.pageUi.coding.setText(settingTuple[2])
+        self.pageUi.outputDir.setText(settingTuple[3])
 
     def SaveSetting(self):
-        serverIp = self.page.serverIp.text()
+        serverIp = self.pageUi.serverIp.text()
         if self.judgeIp(serverIp) == False:
             return
-        serverPort = self.page.serverPort.text()
+        serverPort = self.pageUi.serverPort.text()
         if self.judgePort(serverPort) == False:
             return
-        coding = self.page.coding.text()
-        outputDir = self.page.outputDir.text()
+        coding = self.pageUi.coding.text()
+        outputDir = self.pageUi.outputDir.text()
         settingTuple = (serverIp, serverPort, coding, outputDir)
         self.model.WriteConfig(settingTuple)
         self.close()
     
     def ResetSetting(self):
         defualtSettingTuple = self.model.GetDefaultConfig()
-        self.page.serverIp.setText(defualtSettingTuple[0])
-        self.page.serverPort.setText(defualtSettingTuple[1])
-        self.page.coding.setText(defualtSettingTuple[2])
-        self.page.outputDir.setText(defualtSettingTuple[3])
+        self.pageUi.serverIp.setText(defualtSettingTuple[0])
+        self.pageUi.serverPort.setText(defualtSettingTuple[1])
+        self.pageUi.coding.setText(defualtSettingTuple[2])
+        self.pageUi.outputDir.setText(defualtSettingTuple[3])
     
     
     def judgeIp(self, Ip):

@@ -43,7 +43,12 @@ class Model:
         self.modelType = modelType
         dataRecv = self.TryInitSocketAndSendGetMessage(text)
         return dataRecv
-        
+    
+    def ProcessHTML(self, html) -> str:
+        # convert html to text
+        pass
+        dataRecv = self.TryInitSocketAndSendGetMessage(html)
+        return dataRecv
     def TryInitSocketAndSendGetMessage(self, content) -> str:
         self.TryInitSocket()
         if self.clientSocket is None:
