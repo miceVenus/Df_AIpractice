@@ -32,13 +32,14 @@ class Controller:
         
     
     def OpenNewsExcert(self):
+        self.model.scraper.run()
         existLayout = self.newsExcertPageUi.scrollAreaWidgetContents.layout()
         if existLayout is not None:
             QWidget().setLayout(existLayout)
 
         layout = QVBoxLayout(self.newsExcertPageUi.scrollAreaWidgetContents)
-        for i in range(20):
-            button = QPushButton(f"Button {i+1}")
+        for value in self.model.scraper.linkDict.values():
+            button = QPushButton(f"{value[0]}")
             sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
             button.setSizePolicy(sizePolicy)
             button.setFixedHeight(64)
@@ -161,6 +162,7 @@ class Controller:
                                  border-width:2px;
                                  text-align: left;
                                  font:24px;
+                                 color:#F5F5F5;
                                  padding-left: 20px;""")
     
     def SetScrollBarStyle(self):
