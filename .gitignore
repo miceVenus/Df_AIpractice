@@ -18,6 +18,7 @@ env/
 #忽略本地测试输出库
 output/
 test/
+news/
 
 #忽略 UI文件
 *.ui
