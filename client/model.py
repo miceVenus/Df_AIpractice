@@ -1,7 +1,9 @@
 import configparser
 import socket
 import os
+import shutil
 import time
+from urllib import response
 import requests
 import threading
 from bs4 import BeautifulSoup
@@ -30,11 +32,19 @@ class Model:
         dataRecv = self.TryInitSocketAndSendGetMessage(text)
         return dataRecv
     
-    def ProcessHTML(self, html) -> str:
-        # convert html to text
-        pass
-        dataRecv = self.TryInitSocketAndSendGetMessage(html)
-        return dataRecv
+    def ProcessHTML(self, fileList, modelType) -> list:
+        self.modelType = modelType
+        dataRecvList = []
+        for file in fileList:
+            fileDir = os.path.join(self.config.basicDir, 'news', file+'.txt')    
+            content = self.GetContent(fileDir)
+            # dataRecv = self.TryInitSocketAndSendGetMessage(content)
+            dataRecv = "???"
+            time.sleep(2)
+            dataRecvList.append(dataRecv)
+        return dataRecvList
+        
+    
     def TryInitSocketAndSendGetMessage(self, content) -> str:
         self.TryInitSocket()
         if self.clientSocket is None:
@@ -49,7 +59,7 @@ class Model:
             content = self.modelType + "?" + text
             self.clientSocket.sendall(content.encode(self.config.coding))
             dataRecv = self.clientSocket.recv(65536).decode(self.config.coding)
-            print(f"接收到来自{self.host}的数据:\n {dataRecv}")
+            print(f"接收到来自{self.config.host}的数据:\n {dataRecv}")
             self.clientSocket.close()
             return dataRecv
         except socket.error as se:
@@ -59,8 +69,8 @@ class Model:
             self.clientSocket.close()
 
     def WriteAsFile(self, content, fileDir):
-        if not os.path.exists(self.outputDir):
-            os.mkdir(self.outputDir)
+        if not os.path.exists(self.config.outputDir):
+            os.mkdir(self.config.outputDir)
         fileName = self.GetFileName(fileDir)
         self.WriteContentToFile(content, fileName)
             
@@ -68,27 +78,10 @@ class Model:
         fileName = fileDir.split("/")[-1]
         return fileName
     
-    def GetConfig(self):
-        
-        return (self.config.host, str(self.config.port), self.config.coding, self.config.outputDir)
-    
-    def WriteConfig(self, settingTuple):
-        self.host, port, CODING, self.outputDir = settingTuple
-        self.port = int(port)
-        
-        self.config.config.set("server", "HOST", self.host)
-        self.config.config.set("server", "PORT", str(self.port))
-        self.config.config.set("basic", "CODING", CODING)
-        self.config.config.set("basic", "OUTPUT_DIR", self.outputDir)
-        
-        with open(os.path.join(self.config.basicDir, "config.ini"), mode='w') as file:
-            self.config.config.write(file)
-        file.close()
-    
     def TryInitSocket(self):
         try:
             self.clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.clientSocket.connect((self.host, self.port))
+            self.clientSocket.connect((self.config.host, self.config.port))
         except socket.error as e:
             print(f"Socket 初始化错误 返回None: {e}")
             return None
@@ -101,26 +94,49 @@ class Model:
             
         return content
     
-    def GetDefaultConfig(self):
-        return (self.config.default_host, str(self.config.default_port), self.config.default_coding, self.config.default_output_dir)
-    
     def WriteContentToFile(self, content, fileName):
-        with open(f"{self.outputDir}/{fileName}.txt", mode='w', encoding=self.config.coding) as file:
+        with open(f"{self.config.outputDir}/{fileName}.txt", mode='w', encoding=self.config.coding) as file:
             file.write(content) 
         file.close()
     
+    def ClearResource(self):
+        newsDir = os.path.join(self.config.basicDir, 'news')
+        if os.path.exists(newsDir):
+            shutil.rmtree(newsDir)
+            
     class Scraper:
         def __init__(self, outerInstance : 'Model'):
             self.config = outerInstance.config
             self.headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0'}
             self.linkDict = {}
             self.threads = []
+            self.responseCache = self.GetResponseCached()
         
+        
+        def StartFetch(self):
+            for url in self.linkDict.keys():
+                thread = threading.Thread(target=self.HandleUrl, args=(url,))
+                thread.start()
+                self.threads.append(thread)
+                
+            for thread in self.threads:
+                thread.join()   
+            self.threads.clear()
+                
+            self.HandleResponse()
+
+            for key in self.linkDict.keys():
+                thread = threading.Thread(target=self.SaveToDisk, args=(key,))
+                thread.start()
+                self.threads.append(thread)
+            
+            for thread in self.threads:
+                thread.join()
+                
         def HandleUrl(self, url):
-            response = requests.get(url=url, headers=self.headers)
-            response.encoding = self.config.coding
-            self.linkDict[url].append(response)
-        
+            response = self.GetResponse(url)
+            self.linkDict[url].append(response)    
+            
         def HandleResponse(self):
             keyToDelete = []
             for key in self.linkDict.keys():
@@ -142,7 +158,15 @@ class Model:
                 print(f"删除无用链接: {key}")
                 del self.linkDict[key]
                 
-                
+        def SaveToDisk(self, key):
+            if not os.path.exists(os.path.join(self.config.basicDir, 'news')):
+                os.mkdir(os.path.join(self.config.basicDir, 'news'))
+            
+            filename = re.sub(r'[\\/:*?"<>|]', '', self.linkDict[key][0])
+            with open(os.path.join(self.config.basicDir, 'news', f"{filename}.txt"), 'w', encoding='utf-8') as f:
+                f.write(self.linkDict[key][2])
+            f.close()
+            
         def GetParasFromWeb(self, key) -> list:
             response = self.linkDict[key][1]
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -155,34 +179,6 @@ class Model:
                     return soup.find("div", attrs={"class" : 'content_area'}).find_all('p')
                 case _:
                     return []  
-        def StartFetch(self):
-            for url in self.linkDict.keys():
-                thread = threading.Thread(target=self.HandleUrl, args=(url,))
-                thread.start()
-                self.threads.append(thread)
-            
-            for thread in self.threads:
-                thread.join()   
-            self.threads.clear()
-                
-            self.HandleResponse()
-
-            for key in self.linkDict.keys():
-                thread = threading.Thread(target=self.SaveToDisk, args=(key,))
-                thread.start()
-                self.threads.append(thread)
-            
-            for thread in self.threads:
-                thread.join()
-                    
-        def SaveToDisk(self, key):
-            if not os.path.exists(os.path.join(self.config.basicDir, 'news')):
-                os.mkdir(os.path.join(self.config.basicDir, 'news'))
-            
-            filename = re.sub(r'[\\/:*?"<>|]', '', self.linkDict[key][0])
-            with open(os.path.join(self.config.basicDir, 'news', f"{filename}.txt"), 'w', encoding='utf-8') as f:
-                f.write(self.linkDict[key][2])
-            f.close()  
             
         def GetUrl(self, web):
             match web:
@@ -202,12 +198,20 @@ class Model:
             for div_td in div_tds:
                 link_title = div_td.find("a").get_text(strip=True)
                 self.linkDict[div_td.find("a").get('href')] = [link_title]
+                
+        def GetResponseCached(self):
+            url = self.GetUrl(self.config.web)
+            return self.GetResponse(url)
+                
+        def GetResponse(self, url):
+            response = requests.get(url=url, headers=self.headers)
+            response.encoding = self.config.coding
+            return response
         
         def run(self):
-            url = self.GetUrl(self.config.web)
+            
             strat_time = time.time()
-            response = requests.get(url=url, headers=self.headers)
-            response.encoding = 'utf-8'
+            response = self.responseCache
             print(f"获取网页耗时: {time.time() - strat_time}")
             
             strat_time = time.time()
@@ -238,3 +242,29 @@ class Model:
             self.default_port = self.config.getint("default", "default_port")
             self.default_coding = self.config.get("default", "default_coding")
             self.default_output_dir = self.config.get("default", "default_output_dir")
+            self.default_web = self.config.get("default", "default_web")
+            self.default_maxMsgShow = self.config.getint("default", "default_maxmsgshow")
+        
+        def GetConfig(self):
+            return (self.host, str(self.port), self.coding, self.outputDir, self.web, str(self.maxMsgShow))
+
+        def WriteConfig(self, settingTuple):
+            self.host, port, self.coding, self.outputDir, self.web, maxMsgShow = settingTuple
+            self.port = int(port)
+            self.maxMsgShow = int(maxMsgShow)
+            
+            self.config.set("server", "HOST", self.host)
+            self.config.set("server", "PORT", str(self.port))
+            self.config.set("basic", "CODING", self.coding)
+            self.config.set("basic", "OUTPUT_DIR", self.outputDir)
+            self.config.set("scraper", "web", self.web)
+            self.config.set("scraper", "maxmsgshow", str(self.maxMsgShow))
+            
+            with open(os.path.join(self.basicDir, "config.ini"), mode='w', encoding=self.coding) as file:
+                self.config.write(file)
+            file.close()
+            
+        def GetDefaultConfig(self):
+            return (self.default_host, str(self.default_port), self.default_coding, self.default_output_dir, 
+                    self.default_web, str(self.default_maxMsgShow))
+    

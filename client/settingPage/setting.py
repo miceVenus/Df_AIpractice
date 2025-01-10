@@ -14,17 +14,43 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(664, 750)
+        Dialog.resize(664, 848)
         Dialog.setStyleSheet("background-color:#F5F5F5")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(Dialog)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.verticalWidget = QtWidgets.QWidget(Dialog)
-        self.verticalWidget.setStyleSheet("")
-        self.verticalWidget.setObjectName("verticalWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalWidget)
-        self.verticalLayout.setSpacing(32)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.verticalWidget_2 = QtWidgets.QWidget(self.verticalWidget)
+        self.verticalWidget = QtWidgets.QWidget(Dialog)
+        self.verticalWidget.setObjectName("verticalWidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalWidget)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.scrollArea = QtWidgets.QScrollArea(self.verticalWidget)
+        self.scrollArea.setStyleSheet("\n"
+"            QScrollBar:vertical {\n"
+"                border: 1px solid #999999;\n"
+"                background: #f0f0f0;\n"
+"                width: 12px;\n"
+"                margin: 0px 0px 0px 0px;\n"
+"            }\n"
+"            QScrollBar::handle:vertical {\n"
+"                background: #757575;\n"
+"                min-height: 20px;\n"
+"            }\n"
+"            QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical {\n"
+"                background: #757575;\n"
+"                height: 0px;\n"
+"            }\n"
+"            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"                background: none;\n"
+"            }")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -173, 613, 983))
+        self.scrollAreaWidgetContents.setStyleSheet("")
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_5.setSpacing(12)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.verticalWidget_2 = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         self.verticalWidget_2.setStyleSheet("border-style:solid;\n"
 "border-color:#BDBDBD;\n"
 "border-width:2px;\n"
@@ -64,6 +90,11 @@ class Ui_Dialog(object):
         self.verticalLayout_10.setSpacing(48)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.horizontalWidget_2 = QtWidgets.QWidget(self.verticalWidget_21)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.horizontalWidget_2.sizePolicy().hasHeightForWidth())
+        self.horizontalWidget_2.setSizePolicy(sizePolicy)
         self.horizontalWidget_2.setStyleSheet("border-style:solid;\n"
 "border-color:#BDBDBD;\n"
 "border-width:2px")
@@ -77,7 +108,7 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
         self.label_2.setSizePolicy(sizePolicy)
-        self.label_2.setMaximumSize(QtCore.QSize(16777215, 48))
+        self.label_2.setMaximumSize(QtCore.QSize(16777215, 32))
         self.label_2.setStyleSheet("margin-right:26px;\n"
 "border:none;\n"
 "background-color:#607D8B;\n"
@@ -126,7 +157,7 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
         self.label_3.setSizePolicy(sizePolicy)
-        self.label_3.setMaximumSize(QtCore.QSize(16777215, 48))
+        self.label_3.setMaximumSize(QtCore.QSize(16777215, 32))
         self.label_3.setStyleSheet("margin-right:12px;\n"
 "border:none;\n"
 "background-color:#607D8B;\n"
@@ -164,8 +195,8 @@ class Ui_Dialog(object):
         self.verticalLayout_3.addWidget(self.verticalWidget_21, 0, QtCore.Qt.AlignVCenter)
         self.verticalWidget_2.raise_()
         self.label.raise_()
-        self.verticalLayout.addWidget(self.verticalWidget_2, 0, QtCore.Qt.AlignVCenter)
-        self.verticalWidget_3 = QtWidgets.QWidget(self.verticalWidget)
+        self.verticalLayout_5.addWidget(self.verticalWidget_2)
+        self.verticalWidget_3 = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         self.verticalWidget_3.setStyleSheet("border-style:solid;\n"
 "border-color:#BDBDBD;\n"
 "border-width:2px;\n"
@@ -211,7 +242,7 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
         self.label_5.setSizePolicy(sizePolicy)
-        self.label_5.setMaximumSize(QtCore.QSize(16777215, 48))
+        self.label_5.setMaximumSize(QtCore.QSize(16777215, 32))
         self.label_5.setStyleSheet("border:none;\n"
 "background-color:#607D8B;\n"
 "border-radius:3px;\n"
@@ -259,7 +290,7 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
         self.label_6.setSizePolicy(sizePolicy)
-        self.label_6.setMaximumSize(QtCore.QSize(16777215, 48))
+        self.label_6.setMaximumSize(QtCore.QSize(16777215, 32))
         self.label_6.setStyleSheet("margin-right:23px;\n"
 "border:none;\n"
 "background-color:#607D8B;\n"
@@ -295,25 +326,165 @@ class Ui_Dialog(object):
         self.horizontalLayout_5.addWidget(self.verticalWidget_7)
         self.verticalLayout_11.addWidget(self.horizontalWidget_3)
         self.verticalLayout_4.addWidget(self.verticalWidget_8)
-        self.verticalLayout.addWidget(self.verticalWidget_3)
-        self.horizontalWidget1 = QtWidgets.QWidget(self.verticalWidget)
+        self.verticalLayout_5.addWidget(self.verticalWidget_3)
+        self.verticalWidget_4 = QtWidgets.QWidget(self.scrollAreaWidgetContents)
+        self.verticalWidget_4.setStyleSheet("border-style:solid;\n"
+"border-color:#BDBDBD;\n"
+"border-width:2px;\n"
+"border-radius:6px;\n"
+"font:24px\n"
+"")
+        self.verticalWidget_4.setObjectName("verticalWidget_4")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.verticalWidget_4)
+        self.verticalLayout_9.setSpacing(32)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.label_7 = QtWidgets.QLabel(self.verticalWidget_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_7.sizePolicy().hasHeightForWidth())
+        self.label_7.setSizePolicy(sizePolicy)
+        self.label_7.setMaximumSize(QtCore.QSize(16777215, 64))
+        font = QtGui.QFont()
+        font.setFamily("13")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_7.setFont(font)
+        self.label_7.setStyleSheet("border:none;\n"
+"background-color:#607D8B;\n"
+"border-radius:3px;\n"
+"padding: 5px;\n"
+"font:24px bold;\n"
+"color:#F5F5F5")
+        self.label_7.setObjectName("label_7")
+        self.verticalLayout_9.addWidget(self.label_7)
+        self.verticalWidget_9 = QtWidgets.QWidget(self.verticalWidget_4)
+        self.verticalWidget_9.setStyleSheet("border:none")
+        self.verticalWidget_9.setObjectName("verticalWidget_9")
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.verticalWidget_9)
+        self.verticalLayout_12.setSpacing(48)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.horizontalWidget_7 = QtWidgets.QWidget(self.verticalWidget_9)
+        self.horizontalWidget_7.setStyleSheet("border-style:solid;\n"
+"border-color:#BDBDBD;\n"
+"border-width:2px")
+        self.horizontalWidget_7.setObjectName("horizontalWidget_7")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.horizontalWidget_7)
+        self.horizontalLayout_8.setContentsMargins(-1, 8, 180, 8)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.label111 = QtWidgets.QLabel(self.horizontalWidget_7)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label111.sizePolicy().hasHeightForWidth())
+        self.label111.setSizePolicy(sizePolicy)
+        self.label111.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.label111.setStyleSheet("margin-right:64px;\n"
+"border:none;\n"
+"background-color:#607D8B;\n"
+"border-radius:3px;\n"
+"padding: 5px;\n"
+"font:16px bold;\n"
+"color:#F5F5F5")
+        self.label111.setObjectName("label111")
+        self.horizontalLayout_8.addWidget(self.label111)
+        self.horizontalWidget_8 = QtWidgets.QWidget(self.horizontalWidget_7)
+        self.horizontalWidget_8.setStyleSheet("border:none")
+        self.horizontalWidget_8.setObjectName("horizontalWidget_8")
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.horizontalWidget_8)
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.web = QtWidgets.QLineEdit(self.horizontalWidget_8)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.web.sizePolicy().hasHeightForWidth())
+        self.web.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.web.setFont(font)
+        self.web.setStyleSheet("border-style:solid;\n"
+"border-color:#BDBDBD;\n"
+"border-width:2px;")
+        self.web.setObjectName("web")
+        self.horizontalLayout_9.addWidget(self.web)
+        self.horizontalLayout_8.addWidget(self.horizontalWidget_8)
+        self.verticalLayout_12.addWidget(self.horizontalWidget_7)
+        self.horizontalWidget_9 = QtWidgets.QWidget(self.verticalWidget_9)
+        self.horizontalWidget_9.setStyleSheet("border-style:solid;\n"
+"border-color:#BDBDBD;\n"
+"border-width:2px")
+        self.horizontalWidget_9.setObjectName("horizontalWidget_9")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalWidget_9)
+        self.horizontalLayout_2.setContentsMargins(-1, 8, 180, 8)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.label222 = QtWidgets.QLabel(self.horizontalWidget_9)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label222.sizePolicy().hasHeightForWidth())
+        self.label222.setSizePolicy(sizePolicy)
+        self.label222.setMaximumSize(QtCore.QSize(16777215, 32))
+        self.label222.setStyleSheet("margin-right:26px;\n"
+"border:none;\n"
+"background-color:#607D8B;\n"
+"border-radius:3px;\n"
+"padding: 5px;\n"
+"font:16px bold;\n"
+"color:#F5F5F5")
+        self.label222.setObjectName("label222")
+        self.horizontalLayout_2.addWidget(self.label222)
+        self.verticalWidget_10 = QtWidgets.QWidget(self.horizontalWidget_9)
+        self.verticalWidget_10.setStyleSheet("border:none")
+        self.verticalWidget_10.setObjectName("verticalWidget_10")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.verticalWidget_10)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.maxnews = QtWidgets.QLineEdit(self.verticalWidget_10)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.maxnews.sizePolicy().hasHeightForWidth())
+        self.maxnews.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.maxnews.setFont(font)
+        self.maxnews.setStyleSheet("border-style:solid;\n"
+"border-color:#BDBDBD;\n"
+"border-width:2px;")
+        self.maxnews.setObjectName("maxnews")
+        self.verticalLayout_13.addWidget(self.maxnews)
+        self.horizontalLayout_2.addWidget(self.verticalWidget_10)
+        self.verticalLayout_12.addWidget(self.horizontalWidget_9)
+        self.verticalLayout_9.addWidget(self.verticalWidget_9, 0, QtCore.Qt.AlignVCenter)
+        self.verticalLayout_5.addWidget(self.verticalWidget_4)
+        self.horizontalWidget_6 = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.horizontalWidget1.sizePolicy().hasHeightForWidth())
-        self.horizontalWidget1.setSizePolicy(sizePolicy)
-        self.horizontalWidget1.setObjectName("horizontalWidget1")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalWidget1)
+        sizePolicy.setHeightForWidth(self.horizontalWidget_6.sizePolicy().hasHeightForWidth())
+        self.horizontalWidget_6.setSizePolicy(sizePolicy)
+        self.horizontalWidget_6.setMinimumSize(QtCore.QSize(0, 64))
+        self.horizontalWidget_6.setObjectName("horizontalWidget_6")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalWidget_6)
         self.horizontalLayout_3.setContentsMargins(16, -1, 16, -1)
         self.horizontalLayout_3.setSpacing(143)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.saveButton = QtWidgets.QPushButton(self.horizontalWidget1)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.saveButton = QtWidgets.QPushButton(self.horizontalWidget_6)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.saveButton.sizePolicy().hasHeightForWidth())
         self.saveButton.setSizePolicy(sizePolicy)
-        self.saveButton.setMaximumSize(QtCore.QSize(16777215, 48))
+        self.saveButton.setMaximumSize(QtCore.QSize(16777215, 64))
         self.saveButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.saveButton.setStyleSheet("border:none;\n"
 "background-color:#607D8B;\n"
@@ -328,13 +499,13 @@ class Ui_Dialog(object):
         self.saveButton.setIconSize(QtCore.QSize(24, 24))
         self.saveButton.setObjectName("saveButton")
         self.horizontalLayout_3.addWidget(self.saveButton)
-        self.resetButton = QtWidgets.QPushButton(self.horizontalWidget1)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.resetButton = QtWidgets.QPushButton(self.horizontalWidget_6)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.resetButton.sizePolicy().hasHeightForWidth())
         self.resetButton.setSizePolicy(sizePolicy)
-        self.resetButton.setMaximumSize(QtCore.QSize(16777215, 48))
+        self.resetButton.setMaximumSize(QtCore.QSize(16777215, 64))
         self.resetButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.resetButton.setStyleSheet("border:none;\n"
 "background-color:#607D8B;\n"
@@ -349,8 +520,10 @@ class Ui_Dialog(object):
         self.resetButton.setIconSize(QtCore.QSize(24, 24))
         self.resetButton.setObjectName("resetButton")
         self.horizontalLayout_3.addWidget(self.resetButton)
-        self.verticalLayout.addWidget(self.horizontalWidget1)
-        self.verticalLayout_2.addWidget(self.verticalWidget)
+        self.verticalLayout_5.addWidget(self.horizontalWidget_6)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_2.addWidget(self.scrollArea)
+        self.verticalLayout.addWidget(self.verticalWidget)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -364,3 +537,6 @@ class Ui_Dialog(object):
         self.label_4.setText(_translate("Dialog", "Basic Config"))
         self.label_5.setText(_translate("Dialog", "Coding Config"))
         self.label_6.setText(_translate("Dialog", "Output Dir"))
+        self.label_7.setText(_translate("Dialog", "Scraper Config"))
+        self.label111.setText(_translate("Dialog", "Web"))
+        self.label222.setText(_translate("Dialog", "MaxNews"))

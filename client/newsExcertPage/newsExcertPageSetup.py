@@ -34,7 +34,7 @@ class Ui_Form(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalWidget = QtWidgets.QWidget(Form)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.verticalWidget.sizePolicy().hasHeightForWidth())
@@ -147,11 +147,34 @@ class Ui_Form(object):
 "")
         self.verticalWidget1.setObjectName("verticalWidget1")
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.verticalWidget1)
+        self.verticalLayout_11.setContentsMargins(8, 0, 10, 0)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.refreshButton = QtWidgets.QPushButton(self.verticalWidget1)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.refreshButton.sizePolicy().hasHeightForWidth())
+        self.refreshButton.setSizePolicy(sizePolicy)
+        self.refreshButton.setMinimumSize(QtCore.QSize(72, 0))
+        self.refreshButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.refreshButton.setStyleSheet("background-color:#607D8B;\n"
+"border:solid;\n"
+"border-radius:3px;\n"
+"border-color:#616161;\n"
+"padding:10px\n"
+"\n"
+"")
+        self.refreshButton.setText("")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("asset/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.refreshButton.setIcon(icon4)
+        self.refreshButton.setIconSize(QtCore.QSize(32, 32))
+        self.refreshButton.setObjectName("refreshButton")
+        self.verticalLayout_11.addWidget(self.refreshButton, 0, QtCore.Qt.AlignRight)
         self.horizontalLayout_4.addWidget(self.verticalWidget1)
         self.verticalLayout_9.addWidget(self.horizontalWidget, 0, QtCore.Qt.AlignLeft)
         self.horizontalWidget_2 = QtWidgets.QWidget(self.verticalWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.horizontalWidget_2.sizePolicy().hasHeightForWidth())
@@ -196,11 +219,7 @@ class Ui_Form(object):
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1138, 648))
-        self.scrollAreaWidgetContents.setStyleSheet("""border:solid;
-                                                    border-radius:5px;
-                                                    background-color:#F5F5F5;
-                                                    border-color:#BDBDBD;
-                                                    border-width:2px;""")
+        self.scrollAreaWidgetContents.setStyleSheet("border:none")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.horizontalLayout.addWidget(self.scrollArea)
@@ -224,13 +243,22 @@ class Ui_Form(object):
         self.AckButton.setMinimumSize(QtCore.QSize(0, 103))
         self.AckButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.AckButton.setMouseTracking(False)
-        self.AckButton.setStyleSheet("border:solid;\n"
+        self.AckButton.setStyleSheet("QPushButton{\n"
+"border:solid;\n"
 "border-radius:3px;\n"
 "border-color:#BDBDBD;\n"
 "border-width:2px;\n"
 "background-color:#607D8B;\n"
-"\n"
-"margin-bottom:18px")
+"margin-bottom:18px;\n"
+"}      \n"
+"QPushButton:disabled {\n"
+"background-color: #9E9E9E;\n"
+"border-color: #BDBDBD;\n"
+"border-width: 2px;\n"
+"border: solid;\n"
+"border-radius: 3px;\n"
+"margin-bottom: 18px;\n"
+"}")
         self.AckButton.setText("")
         self.AckButton.setIcon(icon)
         self.AckButton.setIconSize(QtCore.QSize(48, 48))

@@ -13,11 +13,13 @@ class SettingDialog(QDialog):
         self.LoadingSetting()
     
     def LoadingSetting(self):
-        settingTuple = self.model.GetConfig()   
+        settingTuple = self.model.config.GetConfig()   
         self.pageUi.serverIp.setText(settingTuple[0])
         self.pageUi.serverPort.setText(settingTuple[1])
         self.pageUi.coding.setText(settingTuple[2])
         self.pageUi.outputDir.setText(settingTuple[3])
+        self.pageUi.web.setText(settingTuple[4])
+        self.pageUi.maxnews.setText(settingTuple[5])
 
     def SaveSetting(self):
         serverIp = self.pageUi.serverIp.text()
@@ -28,16 +30,20 @@ class SettingDialog(QDialog):
             return
         coding = self.pageUi.coding.text()
         outputDir = self.pageUi.outputDir.text()
-        settingTuple = (serverIp, serverPort, coding, outputDir)
-        self.model.WriteConfig(settingTuple)
+        web = self.pageUi.web.text()
+        maxnewsshow = self.pageUi.maxnews.text()
+        settingTuple = (serverIp, serverPort, coding, outputDir, web, maxnewsshow)
+        self.model.config.WriteConfig(settingTuple)
         self.close()
     
     def ResetSetting(self):
-        defualtSettingTuple = self.model.GetDefaultConfig()
+        defualtSettingTuple = self.model.config.GetDefaultConfig()
         self.pageUi.serverIp.setText(defualtSettingTuple[0])
         self.pageUi.serverPort.setText(defualtSettingTuple[1])
         self.pageUi.coding.setText(defualtSettingTuple[2])
         self.pageUi.outputDir.setText(defualtSettingTuple[3])
+        self.pageUi.web.setText(defualtSettingTuple[4])
+        self.pageUi.maxnews.setText(defualtSettingTuple[5])
     
     
     def judgeIp(self, Ip):
@@ -67,7 +73,8 @@ class SettingDialog(QDialog):
         except ValueError:
             self.WarningDialog("端口号必须为整数")
             return False
-        
+
+            
     def WarningDialog(self, warning):
         msgBox = QMessageBox(QMessageBox.Icon.Warning, "Warning", warning)
         msgBox.exec_()

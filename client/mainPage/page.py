@@ -328,16 +328,23 @@ class Ui_Form(object):
         self.Mt5Button_3.setMinimumSize(QtCore.QSize(0, 45))
         self.Mt5Button_3.setMaximumSize(QtCore.QSize(16777215, 100))
         self.Mt5Button_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.Mt5Button_3.setStyleSheet("border:solid;\n"
+        self.Mt5Button_3.setStyleSheet("QPushButton{border:solid;\n"
 "border-radius:3px;\n"
 "border-color:#BDBDBD;\n"
 "border-width:2px;\n"
-"background-color:#607D8B;")
+"background-color:#607D8B;}\n"
+"\n"
+"QPushButton:disabled {\n"
+"                background-color: #A9A9A9; /* Gray */\n"
+"                color: #808080; /* Dark Gray */\n"
+"            }")
         self.Mt5Button_3.setText("")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("asset/textout1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.Mt5Button_3.setIcon(icon4)
         self.Mt5Button_3.setIconSize(QtCore.QSize(48, 48))
+        self.Mt5Button_3.setCheckable(False)
+        self.Mt5Button_3.setFlat(False)
         self.Mt5Button_3.setObjectName("Mt5Button_3")
         self.verticalLayout_7.addWidget(self.Mt5Button_3)
         self.verticalLayout_5.addWidget(self.horizontalWidget_4)
@@ -387,13 +394,19 @@ class Ui_Form(object):
         self.AckButton.setMinimumSize(QtCore.QSize(0, 103))
         self.AckButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.AckButton.setMouseTracking(False)
-        self.AckButton.setStyleSheet("border:solid;\n"
+        self.AckButton.setStyleSheet(" QPushButton{border:solid;\n"
 "border-radius:3px;\n"
 "border-color:#BDBDBD;\n"
 "border-width:2px;\n"
 "background-color:#607D8B;\n"
 "\n"
-"margin-bottom:18px")
+"margin-bottom:18px}\n"
+"\n"
+"\n"
+"            QPushButton:disabled {\n"
+"                background-color: #A9A9A9; /* Gray */\n"
+"                color: #808080; /* Dark Gray */\n"
+"            }")
         self.AckButton.setText("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap("asset/ack3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
