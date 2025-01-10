@@ -38,9 +38,7 @@ class Model:
         for file in fileList:
             fileDir = os.path.join(self.config.basicDir, 'news', file+'.txt')    
             content = self.GetContent(fileDir)
-            # dataRecv = self.TryInitSocketAndSendGetMessage(content)
-            dataRecv = "???"
-            time.sleep(2)
+            dataRecv = self.TryInitSocketAndSendGetMessage(content)
             dataRecvList.append(dataRecv)
         return dataRecvList
         
