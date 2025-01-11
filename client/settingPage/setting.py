@@ -15,15 +15,16 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(664, 848)
-        Dialog.setStyleSheet("background-color:#F5F5F5")
+        Dialog.setStyleSheet("")
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalWidget = QtWidgets.QWidget(Dialog)
+        self.verticalWidget.setStyleSheet("")
         self.verticalWidget.setObjectName("verticalWidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalWidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.scrollArea = QtWidgets.QScrollArea(self.verticalWidget)
-        self.scrollArea.setStyleSheet("\n"
+        self.scrollArea.setStyleSheet("background-color:#F5F5F5；\n"
 "            QScrollBar:vertical {\n"
 "                border: 1px solid #999999;\n"
 "                background: #f0f0f0;\n"
@@ -44,7 +45,7 @@ class Ui_Dialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -173, 613, 983))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 613, 983))
         self.scrollAreaWidgetContents.setStyleSheet("")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)

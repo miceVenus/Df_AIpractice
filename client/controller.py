@@ -34,7 +34,6 @@ class Controller:
         
     
     def OpenNewsExcert(self):
-        self.model.scraper.run()
         self.RenderNewsPage()
         self.pageStack.setCurrentWidget(self.newsExcertPage)
         
@@ -110,10 +109,13 @@ class Controller:
     
     def SubmitHtml(self):
         self.DisableButton(self.newsExcertPageUi.AckButton)
-        
+    
         self.worker = self.Worker(self.model.ProcessHTML, self.HtmlTitleList, self.currentModelType)
         self.worker.finished.connect(self.OnSubmitHtmlFinished)
         self.worker.start()
+        
+        self.worker2 = self.Worker(self.model.scraper.run)
+        self.worker2.start()
     
     def OnSubmitHtmlFinished(self, result):
         self.RenderExcertNewsPage(result)
@@ -265,6 +267,7 @@ class Controller:
                                                         QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                                                             background: none;
                                                         }""")
+    
     def SetButtonStyle(self, button : QPushButton):
         button.setStyleSheet("""border:solid;
                                  border-radius:5px;

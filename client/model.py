@@ -38,6 +38,7 @@ class Model:
         for file in fileList:
             fileDir = os.path.join(self.config.basicDir, 'news', file+'.txt')    
             content = self.GetContent(fileDir)
+            time.sleep(5)
             dataRecv = self.TryInitSocketAndSendGetMessage(content)
             dataRecvList.append(dataRecv)
         return dataRecvList
@@ -109,6 +110,7 @@ class Model:
             self.linkDict = {}
             self.threads = []
             self.responseCache = self.GetResponseCached()
+            self.GetLinkDictCached()
         
         
         def StartFetch(self):
@@ -200,17 +202,18 @@ class Model:
         def GetResponseCached(self):
             url = self.GetUrl(self.config.web)
             return self.GetResponse(url)
-                
+        
+        def GetLinkDictCached(self):
+            self.run()
+                    
         def GetResponse(self, url):
             response = requests.get(url=url, headers=self.headers)
             response.encoding = self.config.coding
             return response
         
         def run(self):
-            
-            strat_time = time.time()
+            print("开始爬取")
             response = self.responseCache
-            print(f"获取网页耗时: {time.time() - strat_time}")
             
             strat_time = time.time()
             self.Parser(response.text)
