@@ -38,7 +38,6 @@ class Model:
         for file in fileList:
             fileDir = os.path.join(self.config.basicDir, 'news', file+'.txt')    
             content = self.GetContent(fileDir)
-            time.sleep(5)
             dataRecv = self.TryInitSocketAndSendGetMessage(content)
             dataRecvList.append(dataRecv)
         return dataRecvList
@@ -57,6 +56,7 @@ class Model:
         try: 
             content = self.modelType + "?" + text
             self.clientSocket.sendall(content.encode(self.config.coding))
+            print(f"发送{self.config.host}数据:\n {content}")
             dataRecv = self.clientSocket.recv(65536).decode(self.config.coding)
             print(f"接收到来自{self.config.host}的数据:\n {dataRecv}")
             self.clientSocket.close()
